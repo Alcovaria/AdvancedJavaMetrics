@@ -12,16 +12,17 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws ParseException {
-        String code = "function jaja(){alert('SSSSS');} function ded(){alert('SSSSS');}";
+        String code = "a = 10; b = 15;";
 
         InputStream stream = new ByteArrayInputStream(code.getBytes(StandardCharsets.UTF_8));
 
         ASTParser parser = new ASTParser(stream);
 
-        FunctionDeclaration FUN1 = parser.FunctionDeclaration();
-        System.out.println(FUN1.getName());
+        List<VariableDeclaration> var = parser.VariableDeclaratorList();
+        for (VariableDeclaration aVar : var) {
+            System.out.println(aVar.toString());
 
-        FunctionDeclaration FUN2 = parser.FunctionDeclaration();
-        System.out.println(FUN2.getName());
+        }
+
     }
 }
