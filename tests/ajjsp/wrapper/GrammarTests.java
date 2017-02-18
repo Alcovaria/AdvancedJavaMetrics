@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * Created by Vyacheslav on 17-Feb-17.
  */
-class BasicConstructions {
+class GrammarTests {
     @Test
     public void functionDeclarationTest() throws ParseException {
 
