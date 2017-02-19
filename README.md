@@ -1,5 +1,5 @@
 # AdvancedJavaMetrics
-[Logo](https://github.com/Alcovaria/AdvancedJavaMetrics/ajjsmelogo.png)
+[Logo](https://github.com/Alcovaria/AdvancedJavaMetrics/blob/master/ajjsmelogo.png)
 
 JavaScript parser and metrics extractor based on JavaCC
 
