@@ -3,7 +3,7 @@
 
 JavaScript parser and metrics extractor based on JavaCC
 
-Parser and grammar are copied from https://github.com/DigiArea/es5-model/
+Parser and grammar are copied from [DigiArea](https://github.com/DigiArea/es5-model/)
 
 Currently implemented metrics:
 1. Lines of code
