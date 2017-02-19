@@ -19,15 +19,18 @@ class MetricsParser {
 
     private ASTParser parser;
     private List<Statement> statementList;
+    private String code;
 
-    MetricsParser( String code) throws ParseException {
+    MetricsParser(String code) throws ParseException {
         InputStream stream = new ByteArrayInputStream(code.getBytes(StandardCharsets.UTF_8));
         parser = new ASTParser(stream);
         statementList = parser.StatementList();
+        this.code = code;
     }
 
     int linesOfCode(){
-        return 0;
+            String[] lines = code.split("\r\n|\r|\n");
+            return  lines.length;
     }
 
     int linesOfComments(){

@@ -15,13 +15,17 @@ class MetricsParserTests {
 
     @BeforeAll
     static void setUp() {
-        String code = "function myFirstFunction(param1, param2){" +
-                "alert('Hello, world!');" +
-                "}" +
-                "function mySecondFunction(param3, param4){" +
-                "alert('Hello, world!!!');" +
-                "}" +
-                "a = 10+15";
+        String code = "function fun1(arg1, arg2){\n" +
+                "\talert('Me is function1');\n" +
+                "}\n" +
+                "\n" +
+                "function fun2(arg1, arg2){\n" +
+                "\talert('Me is function2');\n" +
+                "}\n" +
+                "\n" +
+                "function fun3(arg1, arg2){\n" +
+                "\talert('Me is function3');\n" +
+                "}";
         try {
             parser = new MetricsParser(code);
         } catch (ParseException e) {
@@ -31,17 +35,17 @@ class MetricsParserTests {
 
     @Test
     void linesOfCode() {
-        assertEquals(0, parser.linesOfCode(), "Wrong number of lines of code.");
+        assertEquals(11, parser.linesOfCode(), "Wrong number of lines of code.");
     }
 
     @Test
     void linesOfComments() {
-        assertEquals(1, parser.linesOfComments(), "Wrong number of lines of comments.");
+        assertEquals(0, parser.linesOfComments(), "Wrong number of lines of comments.");
     }
 
     @Test
     void numberOfFunctions() throws ParseException {
-        assertEquals(2, parser.numberOfFunctions(), "Wrong number of functions.");
+        assertEquals(3, parser.numberOfFunctions(), "Wrong number of functions.");
     }
 
     @Test
