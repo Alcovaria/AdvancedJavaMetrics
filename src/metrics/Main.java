@@ -39,8 +39,8 @@ public class Main {
 
         MetricsParser parser = new MetricsParser(stream);
 
-        System.out.println(parser.numberOfFunctions());
-        System.out.println((stream));
+        System.out.println(parser.linesOfCode());
+
 
         /*
          * Writing metrics to csv file

@@ -30,9 +30,14 @@ class MetricsParser {
         this.code = code;
     }
 
-    MetricsParser(InputStream code) throws ParseException, IOException {
-        parser = new ASTParser(code);
+    MetricsParser(InputStream stream) throws ParseException, IOException {
+        parser = new ASTParser(stream);
         statementList = parser.StatementList();
+        stream.reset();
+        int n = stream.available();
+        byte[] bytes = new byte[n];
+        stream.read(bytes, 0, n);
+        this.code = new String(bytes, StandardCharsets.UTF_8);
     }
 
     int linesOfCode(){
