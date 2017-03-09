@@ -7,9 +7,11 @@ import com.digiarea.es5.parser.ASTParser;
 import com.digiarea.es5.parser.ParseException;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Created by Anastasia on 18.02.2017.
@@ -26,6 +28,11 @@ class MetricsParser {
         parser = new ASTParser(stream);
         statementList = parser.StatementList();
         this.code = code;
+    }
+
+    MetricsParser(InputStream code) throws ParseException, IOException {
+        parser = new ASTParser(code);
+        statementList = parser.StatementList();
     }
 
     int linesOfCode(){
