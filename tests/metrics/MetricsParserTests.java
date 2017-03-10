@@ -4,6 +4,13 @@ import com.digiarea.es5.parser.ParseException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -15,27 +22,24 @@ class MetricsParserTests {
 
     @BeforeAll
     static void setUp() {
-        String code = "function fun1(arg1, arg2){\n" +
-                "\talert('Me is function1');\n" +
-                "}\n" +
-                "\n" +
-                "function fun2(arg1, arg2){\n" +
-                "\talert('Me is function2');\n" +
-                "}\n" +
-                "\n" +
-                "function fun3(arg1, arg2){\n" +
-                "\talert('Me is function3');\n" +
-                "}";
+
+        Path filePath = Paths.get("MetricsParserTests.js");
+
+        InputStream stream = null;
+
         try {
-            parser = new MetricsParser(code);
-        } catch (ParseException e) {
+            stream = new ByteArrayInputStream(Files.readAllBytes(filePath));
+            parser = new MetricsParser(stream);
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
+
+        parser.printAllStatements();
     }
 
     @Test
     void linesOfCode() {
-        assertEquals(11, parser.linesOfCode(), "Wrong number of lines of code.");
+        assertEquals(25, parser.linesOfCode(), "Wrong number of lines of code.");
     }
 
     @Test
@@ -50,8 +54,14 @@ class MetricsParserTests {
 
     @Test
     void numberOfObjects() {
-        assertEquals(0, parser.numberOfObjects(), "Wrong number of objects.");
+        assertEquals(2, parser.numberOfObjects(), "Wrong number of objects.");
     }
+
+    @Test
+    void numberOfVariables() {
+        assertEquals(4, parser.numberOfVariables(), "Wrong number of objects.");
+    }
+
 
     @Test
     void numberOfMethods() {
@@ -70,12 +80,12 @@ class MetricsParserTests {
 
     @Test
     void numberOfLoops() {
-        assertEquals(0, parser.numberOfLoops(), "Wrong number of loops.");
+        assertEquals(1, parser.numberOfLoops(), "Wrong number of loops.");
     }
 
     @Test
     void numberOfConditions() {
-        assertEquals(0, parser.numberOfConditions(), "Wrong number of conditions");
+        assertEquals(1, parser.numberOfConditions(), "Wrong number of conditions");
     }
 
     @Test

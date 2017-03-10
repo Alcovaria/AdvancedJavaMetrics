@@ -1,10 +1,9 @@
 package metrics;
 
-import com.digiarea.es5.Comment;
-import com.digiarea.es5.FunctionDeclaration;
-import com.digiarea.es5.Statement;
+import com.digiarea.es5.*;
 import com.digiarea.es5.parser.ASTParser;
 import com.digiarea.es5.parser.ParseException;
+import javafx.beans.binding.ObjectExpression;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -19,6 +18,7 @@ import java.util.stream.Stream;
 
 class MetricsParser {
 
+    //TODO: Parse recursively
     private ASTParser parser;
     private List<Statement> statementList;
     private String code;
@@ -40,9 +40,16 @@ class MetricsParser {
         this.code = new String(bytes, StandardCharsets.UTF_8);
     }
 
+    //Just for fun
+    void printAllStatements(){
+        for (Statement aList : statementList) {
+            System.out.println(aList.getClass().toString());
+        }
+    }
+
     int linesOfCode(){
             String[] lines = code.split("\r\n|\r|\n");
-            return  lines.length;
+            return lines.length;
     }
 
     int linesOfComments(){
@@ -62,27 +69,53 @@ class MetricsParser {
         return 0;
     }
 
+    //TODO: Count variables for real
+    public int numberOfVariables() {
+        int k = 0;
+        for (Statement aList : statementList) {
+            if (aList instanceof VariableStatement)
+                k++;
+            if (aList instanceof ForStatement) //every loop + variable, lol
+                k++;
+        }
+        return k;
+    }
+
+    //TODO: Maybe we can count AVERAGE number of methods?
     int numberOfMethods(){
         return 0;
     }
 
+    //TODO: Maybe we can count AVERAGE number of attrs?
     int numberOfAttributes(){
         return 0;
     }
 
+    //TODO: Maybe we can count AVERAGE function size?
     int functionSize(){
         return 0;
     }
 
     int numberOfLoops(){
-        return 0;
+        int k = 0;
+        for (Statement aList : statementList) {
+            if (aList instanceof ForStatement)
+                k++;
+
+        }
+        return k;
     }
 
     /**
      * if-else statements
      */
     int numberOfConditions(){
-        return 0;
+        int k = 0;
+        for (Statement aList : statementList) {
+            if (aList instanceof IfStatement)
+                k++;
+        }
+        return k;
     }
 
     int numberOfOperators(){
@@ -92,6 +125,8 @@ class MetricsParser {
     int numberOfExceptions(){
         return 0;
     }
+
+
 
     // test
     public static void main(String[] args) throws ParseException {
@@ -108,4 +143,6 @@ class MetricsParser {
         MetricsParser parser = new MetricsParser(code);
         System.out.println(parser.numberOfFunctions());
     }
+
+
 }
