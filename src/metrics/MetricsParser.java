@@ -10,6 +10,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Anastasia on 18.02.2017.
@@ -43,8 +45,15 @@ class MetricsParser {
             return lines.length;
     }
 
-    int linesOfComments(){
-        return 0;
+    int numberOfComments(){
+        Pattern pattern = Pattern.compile("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)");
+        Matcher matcher = pattern.matcher(code);
+
+        int count = 0;
+        while (matcher.find())
+            count++;
+
+        return count;
     }
 
     int numberOfGlobalVars(){
@@ -102,6 +111,7 @@ class MetricsParser {
                 functions.append(aList);
             }
         }
+        if(k==0) return 0;
         return (functions.toString().split("\r\n|\r|\n").length - k - 1) / k;
     }
 
@@ -146,46 +156,4 @@ class MetricsParser {
         }
         return k;
     }
-
-    // test
-    public static void main(String[] args) throws ParseException {
-        String code = "function myFirstFunction(param1, param2){" +
-                "alert('Hello, world!');" +
-                "a = 10+15" +
-                "}" +
-                "function mySecondFunction(param3, param4){" +
-                "alert('Hello, world!!!');" +
-                "}" +
-                "while(42 == 42){" +
-                "alert('We are doomed')" +
-                "}" +
-                "a = 10+15";
-        MetricsParser parser = new MetricsParser(code);
-        System.out.println(parser.numberOfFunctions());
-        for (Statement aList : parser.statementList) {
-            if (aList instanceof FunctionDeclaration) {
-                List<String> list = new ArrayList<>(Arrays.asList(aList.toString().split("\r\n|\r|\n")));
-                list.remove(0);
-
-                //String s [] = aList.toString().split("\r\n|\r|\n");
-                StringBuilder s2 = new StringBuilder();
-                for (String l : list){
-                    if (l.length() > 2) {
-                        s2.append(l);
-                    }
-                }
-                MetricsParser parser2 = new MetricsParser(s2.toString());
-                System.out.println();
-                for (Node s : parser2.statementList) {
-                    if (s instanceof ExpressionStatement){
-                        System.out.println('+');
-                        Expression ex = ((ExpressionStatement) s).getExpression();
-                        System.out.println();
-                    }
-                }
-            }
-        }
-    }
-
-
 }

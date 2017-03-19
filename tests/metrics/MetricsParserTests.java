@@ -37,7 +37,7 @@ class MetricsParserTests {
 
     @Test
     void linesOfCode() {
-        assertEquals(25, parser.linesOfCode(), "Wrong number of lines of code.");
+        assertEquals(29, parser.linesOfCode(), "Wrong number of lines of code.");
     }
 
     @Test
@@ -52,7 +52,7 @@ class MetricsParserTests {
 
     @Test
     void linesOfComments() {
-        assertEquals(0, parser.linesOfComments(), "Wrong number of lines of comments.");
+        assertEquals(2, parser.numberOfComments(), "Wrong number of lines of comments.");
     }
 
     @Test

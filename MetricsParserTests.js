@@ -1,3 +1,7 @@
+//single-line comment
+
+/*multi-line
+comment*/
 function foo(arg1, arg2) {
     alert('foo');
     function bar(arg3, arg4) {
