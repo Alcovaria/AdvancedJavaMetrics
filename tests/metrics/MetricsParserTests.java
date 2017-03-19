@@ -51,7 +51,7 @@ class MetricsParserTests {
     }
 
     @Test
-    void linesOfComments() {
+    void numberOfComments() {
         assertEquals(2, parser.numberOfComments(), "Wrong number of lines of comments.");
     }
 

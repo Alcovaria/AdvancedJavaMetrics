@@ -21,7 +21,7 @@ public class Main {
 
             FileWriter fw = new FileWriter("metrics.csv");
             fw.write("file name, linesOfCode, numberOfComments, numberOfGlobalVars, numberOfVars, numberOfFunctions, averageFunctionSize, numberOfLoops, numberOfConditions\n");
-            
+
             InputStream stream = null;
 
             for (File file : files) {
