@@ -27,23 +27,24 @@ public class Main {
             for (File file : files) {
                 stream = new ByteArrayInputStream(Files.readAllBytes(Paths.get(file.getPath())));
                 MetricsParser parser = new MetricsParser(stream);
+                String delimiter = ";";
 
                 String res = file.getName();
-                res += ',';
+                res += delimiter;
                 res += parser.linesOfCode();
-                res += ',';
+                res += delimiter;
                 res += parser.numberOfComments();
-                res += ',';
+                res += delimiter;
                 res += parser.numberOfGlobalVars();
-                res += ',';
+                res += delimiter;
                 res += parser.numberOfVars();
-                res += ',';
+                res += delimiter;
                 res += parser.numberOfFunctions();
-                res += ',';
+                res += delimiter;
                 res += parser.averageFunctionSize();
-                res += ',';
+                res += delimiter;
                 res += parser.numberOfLoops();
-                res += ',';
+                res += delimiter;
                 res += parser.numberOfConditions();
                 res += '\n';
 
@@ -52,7 +53,7 @@ public class Main {
 
             fw.close();
 
-            System.out.println("Report had been generated successfully! (check metrics.csv)");
+            System.out.println("Report has been generated successfully! (check metrics.csv)");
         } catch (NoSuchFileException e) {
             System.out.println("Sorry, could not find such folder.");
         } catch (ArrayIndexOutOfBoundsException e) {
