@@ -43,6 +43,16 @@ class MetricsParserTests {
     }
 
     @Test
+    void numberOfGlobalVars() {
+        assertEquals(3, parser.numberOfGlobalVars(), "Wrong number of lines of code.");
+    }
+
+    @Test
+    void numberOfVars() throws ParseException {
+        assertEquals(3, parser.numberOfVars(), "Wrong number of objects.");
+    }
+
+    @Test
     void linesOfComments() {
         assertEquals(0, parser.linesOfComments(), "Wrong number of lines of comments.");
     }
@@ -53,48 +63,17 @@ class MetricsParserTests {
     }
 
     @Test
-    void numberOfObjects() {
-        assertEquals(2, parser.numberOfObjects(), "Wrong number of objects.");
+    void averageFunctionSize() {
+        assertEquals(2, parser.averageFunctionSize(), "Wrong function size.");
     }
 
     @Test
-    void numberOfVariables() {
-        assertEquals(4, parser.numberOfVariables(), "Wrong number of objects.");
-    }
-
-
-    @Test
-    void numberOfMethods() {
-        assertEquals(0, parser.numberOfMethods(), "Wrong number of methods.");
-    }
-
-    @Test
-    void numberOfAttributes() {
-        assertEquals(0, parser.numberOfAttributes(), "Wrong number of attributes.");
-    }
-
-    @Test
-    void functionSize() {
-        assertEquals(0, parser.functionSize(), "Wrong function size.");
-    }
-
-    @Test
-    void numberOfLoops() {
+    void numberOfLoops() throws ParseException {
         assertEquals(1, parser.numberOfLoops(), "Wrong number of loops.");
     }
 
     @Test
-    void numberOfConditions() {
+    void numberOfConditions() throws ParseException {
         assertEquals(1, parser.numberOfConditions(), "Wrong number of conditions");
-    }
-
-    @Test
-    void numberOfOperators() {
-        assertEquals(0, parser.numberOfOperators(), "Wrong number of operators");
-    }
-
-    @Test
-    void numberOfExceptions() {
-        assertEquals(0, parser.numberOfExceptions(), "Wrong number of exceptions");
     }
 }
