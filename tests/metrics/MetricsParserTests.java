@@ -33,8 +33,6 @@ class MetricsParserTests {
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
-
-        parser.printAllStatements();
     }
 
     @Test

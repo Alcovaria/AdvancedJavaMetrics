@@ -17,7 +17,6 @@ import java.util.List;
 
 class MetricsParser {
 
-    //TODO: Parse recursively
     private ASTParser parser;
     private List<Statement> statementList;
     private String code;
